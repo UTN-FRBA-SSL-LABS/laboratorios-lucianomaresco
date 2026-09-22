@@ -3,11 +3,11 @@ PROGRAMA := suma
 
 # TODO 1: Definí el compilador a usar
 #         Asigná el valor "gcc" a la variable CC
-CC :=
+CC := gcc
 
 # TODO 2: Definí las flags de compilación
 #         Asigná el valor "-Wall" a la variable CFLAGS
-CFLAGS :=
+CFLAGS := -Wall
 
 # Regla principal: indica qué construir al ejecutar `make`
 all: $(PROGRAMA)
@@ -17,12 +17,12 @@ all: $(PROGRAMA)
 #         Usá las variables $(CC) y $(CFLAGS), el archivo suma.c,
 #         y el flag -o $(PROGRAMA) para nombrar el ejecutable
 $(PROGRAMA): suma.c
-	# Escribí el comando aquí (reemplazá este comentario)
+	$(CC) $(CFLAGS) suma.c -o $(PROGRAMA)
 
 # Regla para limpiar los archivos generados
 # TODO 4: Completá el comando para eliminar el ejecutable
 #         Usá rm -f y la variable $(PROGRAMA)
 clean:
-	# Escribí el comando aquí (reemplazá este comentario)
+	rm -f $(PROGRAMA)
 
 .PHONY: all clean
