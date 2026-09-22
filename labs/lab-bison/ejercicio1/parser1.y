@@ -10,43 +10,30 @@ void yyerror(const char *msg) { fprintf(stderr, "Error: %s\n", msg); }
 
 %%
 
-/*
- * Gramática para una calculadora infija simple.
- * Está estructurada en tres niveles (exp / term / factor)
- * para expresar precedencia sin necesidad de declaraciones adicionales:
- *   - exp   maneja + y -  (menor precedencia)
- *   - term  maneja * y /  (mayor precedencia)
- *   - factor maneja números y paréntesis
- *
- * Las acciones semánticas calculan el valor de cada producción:
- *   $$   = valor del no-terminal del lado izquierdo (resultado)
- *   $1, $2, $3, … = valores de los símbolos del lado derecho
- */
-
 input:
     /* vacío */
   | input linea
   ;
 
 linea:
-    exp '\n'   { /* TODO 5 — Imprimir el resultado: printf("= %d\n", $1); */ }
+    exp '\n'   { printf("= %d\n", $1); }
   ;
 
 exp:
-    exp '+' term   { $$ = $1 + $3; }          /* Ejemplo: suma ya implementada */
-  | exp '-' term   { $$ = 0; /* TODO 1 — Reemplazar 0 por la expresión correcta */ }
+    exp '+' term   { $$ = $1 + $3; }
+  | exp '-' term   { $$ = $1 - $3; }
   | term           { $$ = $1; }
   ;
 
 term:
-    term '*' factor { $$ = 0; /* TODO 2 — Reemplazar 0 por la expresión correcta */ }
-  | term '/' factor { $$ = 0; /* TODO 3 — Reemplazar 0 por la expresión correcta */ }
+    term '*' factor { $$ = $1 * $3; }
+  | term '/' factor { $$ = $1 / $3; }
   | factor          { $$ = $1; }
   ;
 
 factor:
     NUM             { $$ = $1; }
-  | '(' exp ')'    { $$ = 0; /* TODO 4 — Reemplazar 0 por la expresión correcta */ }
+  | '(' exp ')'     { $$ = $2; }
   ;
 
 %%
