@@ -1,6 +1,6 @@
 # Laboratorio: Introducción a Bison
 
-**Nombre:** ___________________________
+**Nombre:** Luciano Maresco
 
 ## Verificación y calificación
 
